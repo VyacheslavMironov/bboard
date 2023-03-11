@@ -8,9 +8,45 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>@yield('title')</title>
 </head>
 <body>
+<div class="container_fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ route('index') }}">Доска объявлений</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('index') }}" class="nav-link">Объявления</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link">Мои объявления</a>
+                    </li>
+                    @guest
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Вход</a>
+                    </li>
+                    @endguest
+                    @auth
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="post" class="form-inline">
+                            @csrf
+                            <input type="submit" class="btn btn-danger" value="Выход">
+                        </form>
+                    </li>
+                    @endauth
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
 <div class="container">
     <div class="col-7 mt-5 mx-auto">
         @yield('main')

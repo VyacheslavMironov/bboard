@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Доска объявлений')
 @section('main')
     @if (count($bbs) > 0)
     <table class="table table-striped">
